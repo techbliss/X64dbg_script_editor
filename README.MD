@@ -7,5 +7,8 @@ dependencies
 http://www.riverbankcomputing.com/software/pyqt/download
 py2.7 Qt version 4.8 x86 machine
 
+this will only work when x64dbg gets the OpenScriptThread added
+
+
 
 

@@ -1,4 +1,4 @@
-
+# Created by: Storm Shadow http://www.techbliss.org
 
 import sys
 import os
