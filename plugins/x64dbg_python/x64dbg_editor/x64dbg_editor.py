@@ -28,7 +28,7 @@ except AttributeError:
 class Ui_vindu(object):
     def setupUi(self, vindu):
         vindu.setObjectName(_fromUtf8("vindu"))
-        vindu.resize(1093, 734)
+        vindu.resize(1097, 734)
         # set app icon
         app_icon = QtGui.QIcon()
         app_icon.addFile('ico.png', QtCore.QSize(16,16))
