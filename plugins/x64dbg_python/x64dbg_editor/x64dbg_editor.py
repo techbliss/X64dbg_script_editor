@@ -77,6 +77,9 @@ class Ui_vindu(object):
         self.codebox.setBraceMatching(QsciScintilla.SloppyBraceMatch)
         self.codebox.setCaretLineBackgroundColor(QColor("#ffe4e4"))
 
+        #scroolbar
+        self.codebox.SendScintilla(QsciScintilla.SCI_SETHSCROLLBAR, 0)
+
         self.retranslateUi(vindu)
         QtCore.QObject.connect(self.runbtr, QtCore.SIGNAL(_fromUtf8("clicked()")), self.codebox.selectAll)
         QtCore.QMetaObject.connectSlotsByName(vindu)
@@ -92,7 +95,6 @@ class Ui_vindu(object):
         self.runbtr.clicked.connect(self.runto)
         self.impbtr.clicked.connect(self.openfile)
         self.exbtr.clicked.connect(self.saveFile)
-
 
     def runto(self):
         g = globals()
