@@ -66,11 +66,12 @@ class Ui_vindu(object):
 
         #python style
         lexer = QsciLexerPython(self.codebox)
-        self.codebox.setLexer(lexer)
         lexer.setDefaultFont(skrift)
         self.codebox.setLexer(lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
 
+        #folding you can turn it on
+        #self.codebox.setFolding(QsciScintilla.CircledTreeFoldStyle)
         #line numbers
         fontmetrics = QFontMetrics(skrift)
         self.codebox.setMarginsFont(skrift)
