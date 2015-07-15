@@ -11,6 +11,8 @@ from PyQt4.QtGui import QFont, QFontMetrics, QColor
 sys.path.extend(os.path.expandvars("%Path%").split(os.pathsep))
 sys.path.append(os.path.expanduser("~"))
 
+
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -27,26 +29,31 @@ except AttributeError:
 
 class Ui_vindu(object):
     def setupUi(self, vindu):
+        vindu.setWindowState(vindu.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive)
+        # this will bring window toi frront
+        vindu.activateWindow()
         vindu.setObjectName(_fromUtf8("vindu"))
-        vindu.resize(1097, 734)
+        vindu.resize(690, 530)
+        #vindu.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         # set app icon
         app_icon = QtGui.QIcon()
         app_icon.addFile('ico.png', QtCore.QSize(16,16))
         vindu.setWindowIcon( app_icon)
         vindu.setStyleSheet(_fromUtf8(""))
         self.codebox = Qsci.QsciScintilla(vindu)
-        self.codebox.setGeometry(QtCore.QRect(-1, -1, 1101, 661))
+        #self.codebox.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.codebox.setGeometry(QtCore.QRect(-1, -1, 691, 461))
         self.codebox.setToolTip(_fromUtf8(""))
         self.codebox.setWhatsThis(_fromUtf8(""))
         self.codebox.setObjectName(_fromUtf8("codebox"))
         self.runbtr = QtGui.QPushButton(vindu)
-        self.runbtr.setGeometry(QtCore.QRect(790, 680, 94, 34))
+        self.runbtr.setGeometry(QtCore.QRect(380, 480, 94, 34))
         self.runbtr.setObjectName(_fromUtf8("runbtr"))
         self.impbtr = QtGui.QPushButton(vindu)
-        self.impbtr.setGeometry(QtCore.QRect(890, 680, 94, 34))
+        self.impbtr.setGeometry(QtCore.QRect(480, 480, 94, 34))
         self.impbtr.setObjectName(_fromUtf8("impbtr"))
         self.exbtr = QtGui.QPushButton(vindu)
-        self.exbtr.setGeometry(QtCore.QRect(990, 680, 94, 34))
+        self.exbtr.setGeometry(QtCore.QRect(580, 480, 94, 34))
         self.exbtr.setObjectName(_fromUtf8("exbtr"))
         self.curFile = ''
 
