@@ -34,7 +34,7 @@ class Ui_vindu(QtGui.QDialog):
         vindu.setWindowState(vindu.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive | QtCore.Qt.WindowStaysOnTopHint)
         # this will bring window to front and stay there
         vindu.activateWindow()
-        vindu.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        #vindu.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         #the rest
         vindu.setObjectName(_fromUtf8("vindu"))
         vindu.resize(690, 530)
@@ -94,9 +94,16 @@ class Ui_vindu(QtGui.QDialog):
         #scroolbar
         self.codebox.SendScintilla(QsciScintilla.SCI_SETHSCROLLBAR, 1)
 
+        #shortcuts
+
+
+        #self.codebox.addAction(newAction)
+
         self.retranslateUi(vindu)
         QtCore.QObject.connect(self.runbtr, QtCore.SIGNAL(_fromUtf8("clicked()")), self.codebox.selectAll)
         QtCore.QMetaObject.connectSlotsByName(vindu)
+
+
 
     def retranslateUi(self, vindu):
         vindu.setWindowTitle(_translate("vindu", "X64dbg Script Editor", None))
@@ -110,29 +117,15 @@ class Ui_vindu(QtGui.QDialog):
         self.impbtr.clicked.connect(self.openfile)
         self.exbtr.clicked.connect(self.saveFile)
 
-    def runto(self):
-        g = globals()
-        exec str(self.codebox.text())
-
-
     def openfile(self, path=None):
-        if not path:
-            path = QtGui.QFileDialog.getOpenFileName(self.impbtr, "Open File",
-                    '', "Python Files (*.py *.pyc *pyw)")
+        filename = QtGui.QFileDialog.getOpenFileName(self, "Open",
+                    '', "Python Files (*.py *.pyc *.pyw)", sys.path.append(os.path.expanduser("~")))
+        f = open(filename, 'r')
 
-        if path:
-            inFile = QtCore.QFile(path)
-            if inFile.open(QtCore.QFile.ReadOnly | QtCore.QFile.Text):
-                text = inFile.readAll()
+        filedata = f.read()
+        self.codebox.setText(filedata)
+        f.close()
 
-                try:
-                    # Python v3.
-                    text = str(text, encoding='ascii')
-                except TypeError:
-                    # Python v2.
-                    text = str(text)
-
-                self.codebox.setText(text)
 
     def saveFile(self, fileName):
         fileName = QtGui.QFileDialog.getSaveFileName(self.exbtr, "Save as",
@@ -149,6 +142,9 @@ class Ui_vindu(QtGui.QDialog):
         else:
             QtGui.QMessageBox.information(self.exbtr, "Unable to open file",
                     file.errorString())
+
+    def runto(self):
+        exec str(self.codebox.text())
 
 from PyQt4 import Qsci
 
