@@ -35,7 +35,7 @@ class Ui_vindu(QtGui.QDialog):
         # this will bring window to front and stay there
         vindu.activateWindow()
         vindu.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-
+        #the rest
         vindu.setObjectName(_fromUtf8("vindu"))
         vindu.resize(690, 530)
         #vindu.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
@@ -61,7 +61,6 @@ class Ui_vindu(QtGui.QDialog):
         self.exbtr.setObjectName(_fromUtf8("exbtr"))
         self.curFile = ''
 
-
         #font
         skrift = QFont()
         skrift.setFamily('Consolas')
@@ -72,14 +71,7 @@ class Ui_vindu(QtGui.QDialog):
         #python style
         lexer = QsciLexerPython(self.codebox)
         #api test not working
-        #api = Qsci.QsciAPIs(lexer)
-        #api.add("aLongString")
-        #api.add("aLongerString")
-        #api.add("aDifferentString")
-        #api.add("sOmethingElse")
-        #api.prepare()
-        #self.codebox.setAutoCompletionThreshold(1)
-        #self.codebox.setAutoCompletionSource(QsciScintilla.AcsAPIs)
+        api = Qsci.QsciAPIs(lexer)
         lexer.setDefaultFont(skrift)
         self.codebox.setLexer(lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
@@ -100,13 +92,11 @@ class Ui_vindu(QtGui.QDialog):
         self.codebox.setCaretLineBackgroundColor(QColor("#ffe4e4"))
 
         #scroolbar
-        self.codebox.SendScintilla(QsciScintilla.SCI_SETHSCROLLBAR, 0)
+        self.codebox.SendScintilla(QsciScintilla.SCI_SETHSCROLLBAR, 1)
 
         self.retranslateUi(vindu)
         QtCore.QObject.connect(self.runbtr, QtCore.SIGNAL(_fromUtf8("clicked()")), self.codebox.selectAll)
         QtCore.QMetaObject.connectSlotsByName(vindu)
-
-        #return QtGui.QApplication.exec_()
 
     def retranslateUi(self, vindu):
         vindu.setWindowTitle(_translate("vindu", "X64dbg Script Editor", None))
