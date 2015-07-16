@@ -27,7 +27,9 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_vindu(object):
+class Ui_vindu(QtGui.QDialog):
+    def __init__(self):
+        QtCore.QObject.__init__(self)
     def setupUi(self, vindu):
         vindu.setWindowState(vindu.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive)
         # this will bring window toi frront
@@ -57,6 +59,7 @@ class Ui_vindu(object):
         self.exbtr.setObjectName(_fromUtf8("exbtr"))
         self.curFile = ''
 
+
         #font
         skrift = QFont()
         skrift.setFamily('Consolas')
@@ -66,6 +69,16 @@ class Ui_vindu(object):
 
         #python style
         lexer = QsciLexerPython(self.codebox)
+        #api test not working
+        #api = Qsci.QsciAPIs(lexer)
+        #api.add("aLongString")
+        #api.add("aLongerString")
+        #api.add("aDifferentString")
+        #api.add("sOmethingElse")
+        #api.prepare()
+        #self.codebox.setAutoCompletionThreshold(1)
+        #self.codebox.setAutoCompletionSource(QsciScintilla.AcsAPIs)
+        #setfonts
         lexer.setDefaultFont(skrift)
         self.codebox.setLexer(lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
@@ -91,6 +104,7 @@ class Ui_vindu(object):
         self.retranslateUi(vindu)
         QtCore.QObject.connect(self.runbtr, QtCore.SIGNAL(_fromUtf8("clicked()")), self.codebox.selectAll)
         QtCore.QMetaObject.connectSlotsByName(vindu)
+        #return QtGui.QApplication.exec_()
 
     def retranslateUi(self, vindu):
         vindu.setWindowTitle(_translate("vindu", "X64dbg Script Editor", None))
