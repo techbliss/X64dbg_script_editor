@@ -31,9 +31,11 @@ class Ui_vindu(QtGui.QDialog):
     def __init__(self):
         QtCore.QObject.__init__(self)
     def setupUi(self, vindu):
-        vindu.setWindowState(vindu.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive)
-        # this will bring window toi frront
+        vindu.setWindowState(vindu.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive | QtCore.Qt.WindowStaysOnTopHint)
+        # this will bring window to front and stay there
         vindu.activateWindow()
+        vindu.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+
         vindu.setObjectName(_fromUtf8("vindu"))
         vindu.resize(690, 530)
         #vindu.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
@@ -78,7 +80,6 @@ class Ui_vindu(QtGui.QDialog):
         #api.prepare()
         #self.codebox.setAutoCompletionThreshold(1)
         #self.codebox.setAutoCompletionSource(QsciScintilla.AcsAPIs)
-        #setfonts
         lexer.setDefaultFont(skrift)
         self.codebox.setLexer(lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
@@ -104,6 +105,7 @@ class Ui_vindu(QtGui.QDialog):
         self.retranslateUi(vindu)
         QtCore.QObject.connect(self.runbtr, QtCore.SIGNAL(_fromUtf8("clicked()")), self.codebox.selectAll)
         QtCore.QMetaObject.connectSlotsByName(vindu)
+
         #return QtGui.QApplication.exec_()
 
     def retranslateUi(self, vindu):
