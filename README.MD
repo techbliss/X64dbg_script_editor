@@ -30,4 +30,5 @@ http://www.techbliss.org/threads/test-build-x64dbg-support-for-pyqt4-with-editor
 16. Author:             Ctrl+B</pre>
 
 
-![vdpqq](https://cloud.githubusercontent.com/assets/3592375/8758596/1ded36d8-2ce6-11e5-80ae-3f4aa53cd5e9.jpg)
+![zkl62pf](https://cloud.githubusercontent.com/assets/3592375/8758623/7b971de4-2ce6-11e5-9662-171677651499.png)
+
