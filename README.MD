@@ -11,21 +11,22 @@ this will only work when x64dbg gets the OpenScriptThread added
 get help here
 http://www.techbliss.org/threads/test-build-x64dbg-support-for-pyqt4-with-editor.721/#post-2363
 
+<pre>
+1. Hotkeys:
+2.  NewFile:            Ctrl+N
+3.  OpenFile:           Ctrl+O
+4.  SaveFile:           Ctrl+S
+5.  RunScript:          Ctrl+E
+6.  Undo:               Ctrl+Z
+7.  Redo:               Ctrl+Y
+8.  SelectALL:          Ctrl+A
+9.  Paste:              Ctrl+P
+10. ResetFolding:       Ctrl+R
+11. CircleFolding:      Ctrl+C
+12. PlainFolding:       Ctrl+P
+13. X64dbgHome:         Ctrl+W
+14. Irc:                Ctrl+I
+15. X64dbgPythonGit:    Ctrl+G
+16. Author:             Ctrl+B</pre>
 
-''''Hotkeys:
-    NewFile:            Ctrl+N
-    OpenFile:           Ctrl+O
-    SaveFile:           Ctrl+S
-    RunScript:          Ctrl+E
-    Undo:               Ctrl+Z
-    Redo:               Ctrl+Y
-    SelectALL:          Ctrl+A
-    Paste:              Ctrl+P
-    ResetFolding:       Ctrl+R
-    CircleFolding:      Ctrl+C
-    PlainFolding:       Ctrl+P
-    X64dbgHome:         Ctrl+W
-    Irc:                Ctrl+I
-    X64dbgPythonGit:    Ctrl+G
-    Author:             Ctrl+B
 
