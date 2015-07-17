@@ -20,7 +20,7 @@ http://www.techbliss.org/threads/test-build-x64dbg-support-for-pyqt4-with-editor
 6.  Undo:               Ctrl+Z
 7.  Redo:               Ctrl+Y
 8.  SelectALL:          Ctrl+A
-9.  Paste:              Ctrl+P
+9.  Paste:              Ctrl+V
 10. ResetFolding:       Ctrl+R
 11. CircleFolding:      Ctrl+C
 12. PlainFolding:       Ctrl+P
