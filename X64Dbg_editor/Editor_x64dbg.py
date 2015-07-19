@@ -235,7 +235,7 @@ class Ui_MainWindow(object):
         g = globals()
         script = str(self.codebox.text())
         exec (script, g)
-        QtGui.QCloseEvent(str(self.codebox.text()))
+        QtGui.QCloseEvent()
 
     #for now this isent here
     '''def runtoglobal(self):
