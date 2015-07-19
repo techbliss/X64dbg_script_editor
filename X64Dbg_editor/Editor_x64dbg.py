@@ -7,6 +7,8 @@ import PyQt4
 from PyQt4 import QtCore, QtGui, Qsci
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, QsciScintillaBase
 from PyQt4.QtGui import QFont, QFontMetrics, QColor, QMainWindow, QTextCursor
+import icons.ico
+from icons.ico import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -35,7 +37,7 @@ class Ui_MainWindow(object):
         self.vindu.setObjectName(_fromUtf8("vindu"))
         self.verticalLayout = QtGui.QVBoxLayout(self.vindu)
         app_icon = QtGui.QIcon()
-        app_icon.addFile('icons/ico.png', QtCore.QSize(16,16))
+        app_icon.addFile(':/ico/ico.png', QtCore.QSize(16,16))
         MainWindow.setWindowIcon( app_icon)
         self.verticalLayout.setMargin(0)
         self.verticalLayout.setSpacing(0)
@@ -56,22 +58,22 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.LeftToolBarArea, self.toolBar)
         self.toolBar.addSeparator()
         #first action Newfile
-        self.toolBar.newAction = QtGui.QAction(QtGui.QIcon("icons/new.png"),"New",self.toolBar)
+        self.toolBar.newAction = QtGui.QAction(QtGui.QIcon(":/ico/new.png"),"New",self.toolBar)
         self.toolBar.newAction.setStatusTip("Clear TextBox or make new document.")
         self.toolBar.newAction.setShortcut("Ctrl+N")
         self.toolBar.newAction.triggered.connect(self.newfile)
         #second Action OpenFile
-        self.toolBar.secondAction = QtGui.QAction(QtGui.QIcon("icons/open.png"),"Open",self.toolBar)
+        self.toolBar.secondAction = QtGui.QAction(QtGui.QIcon(":/ico/open.png"),"Open",self.toolBar)
         self.toolBar.secondAction.setStatusTip("Create a new document from scratch.")
         self.toolBar.secondAction.setShortcut("Ctrl+O")
         self.toolBar.secondAction.triggered.connect(self.open)
         # action 3 save file
-        self.toolBar.Action3 = QtGui.QAction(QtGui.QIcon("icons/save.png"),"Save",self.toolBar)
+        self.toolBar.Action3 = QtGui.QAction(QtGui.QIcon(":/ico/save.png"),"Save",self.toolBar)
         self.toolBar.Action3.setStatusTip("Save Your File.")
         self.toolBar.Action3.setShortcut("Ctrl+S")
         self.toolBar.Action3.triggered.connect(self.savefile)
         #action 4 run file
-        self.toolBar.Action4 = QtGui.QAction(QtGui.QIcon("icons/run32.png"),"Run To Debugger",self.toolBar)
+        self.toolBar.Action4 = QtGui.QAction(QtGui.QIcon(":/ico/run32.png"),"Run To Debugger",self.toolBar)
         self.toolBar.Action4.setStatusTip("Run your file within debugger.")
         self.toolBar.Action4.setShortcut("Ctrl+E")
         self.toolBar.Action4.triggered.connect(self.runto)
@@ -82,47 +84,47 @@ class Ui_MainWindow(object):
         self.toolBar.Action5.triggered.connect(self.runtoglobal)
         '''
         #action 6 undo
-        self.toolBar.Action6 = QtGui.QAction(QtGui.QIcon("icons/undo.png"),"Undo",self.toolBar)
+        self.toolBar.Action6 = QtGui.QAction(QtGui.QIcon(":/ico/undo.png"),"Undo",self.toolBar)
         self.toolBar.Action6.setStatusTip("Undo.")
         self.toolBar.Action6.setShortcut("Ctrl+Z")
         self.toolBar.Action6.triggered.connect(self.codebox.undo)
         #action 7 redo
-        self.toolBar.Action7 = QtGui.QAction(QtGui.QIcon("icons/redo.png"),"Redo",self.toolBar)
+        self.toolBar.Action7 = QtGui.QAction(QtGui.QIcon(":/ico/redo.png"),"Redo",self.toolBar)
         self.toolBar.Action7.setStatusTip("Redo.")
         self.toolBar.Action7.setShortcut("Ctrl+Y")
         self.toolBar.Action7.triggered.connect(self.codebox.redo)
         #action8 rerset Folding
-        self.toolBar.Action8 = QtGui.QAction(QtGui.QIcon("icons/align-justify.png"),"Reset Folding",self.toolBar)
+        self.toolBar.Action8 = QtGui.QAction(QtGui.QIcon(":/ico/align-justify.png"),"Reset Folding",self.toolBar)
         self.toolBar.Action8.setStatusTip("Reset Folding.")
         self.toolBar.Action8.setShortcut("Ctrl+R")
         self.toolBar.Action8.triggered.connect(self.nofoldingl)
         #actions9 CircledTreeFoldStyle
-        self.toolBar.Action9 = QtGui.QAction(QtGui.QIcon("icons/bullet.png"),"Circled Tree Folding",self.toolBar)
+        self.toolBar.Action9 = QtGui.QAction(QtGui.QIcon(":/ico/bullet.png"),"Circled Tree Folding",self.toolBar)
         self.toolBar.Action9.setStatusTip("Circled Tree Folding.")
         self.toolBar.Action9.setShortcut("Ctrl+C")
         self.toolBar.Action9.triggered.connect(self.Circledfold)
         #actions10 plainFoldStyle
-        self.toolBar.Action10 = QtGui.QAction(QtGui.QIcon("icons/number.png"),"Plain Folding",self.toolBar)
+        self.toolBar.Action10 = QtGui.QAction(QtGui.QIcon(":/ico/number.png"),"Plain Folding",self.toolBar)
         self.toolBar.Action10.setStatusTip("Plain Folding")
         self.toolBar.Action10.setShortcut("Ctrl+P")
         self.toolBar.Action10.triggered.connect(self.plainfold)
         #web baby
-        self.toolBar.Action11 = QtGui.QAction(QtGui.QIcon("icons/web.png"),"Goto x64dbg homepage",self.toolBar)
+        self.toolBar.Action11 = QtGui.QAction(QtGui.QIcon(":/ico/web.png"),"Goto x64dbg homepage",self.toolBar)
         self.toolBar.Action11.setStatusTip("Home of x64dbg")
         self.toolBar.Action11.setShortcut("Ctrl+W")
         self.toolBar.Action11.triggered.connect(self.webopen)
         #irc
-        self.toolBar.Action12 = QtGui.QAction(QtGui.QIcon("icons/irc.png"),"Open X64dbg Irc",self.toolBar)
+        self.toolBar.Action12 = QtGui.QAction(QtGui.QIcon(":/ico/irc.png"),"Open X64dbg Irc",self.toolBar)
         self.toolBar.Action12.setStatusTip("Talk about x64dbg on irc")
         self.toolBar.Action12.setShortcut("Ctrl+I")
         self.toolBar.Action12.triggered.connect(self.ircopen)
         #github Python
-        self.toolBar.Action14 = QtGui.QAction(QtGui.QIcon("icons/github.png"),"Open git python",self.toolBar)
+        self.toolBar.Action14 = QtGui.QAction(QtGui.QIcon(":/ico/github.png"),"Open git python",self.toolBar)
         self.toolBar.Action14.setStatusTip("Open git python")
         self.toolBar.Action14.setShortcut("Ctrl+G")
         self.toolBar.Action14.triggered.connect(self.gitopen)
         #auther me :)
-        self.toolBar.Action15 = QtGui.QAction(QtGui.QIcon("icons/auth.png"),"Author",self.toolBar)
+        self.toolBar.Action15 = QtGui.QAction(QtGui.QIcon(":/ico/auth.png"),"Author",self.toolBar)
         self.toolBar.Action15.setStatusTip("Author")
         self.toolBar.Action15.setShortcut("Ctrl+B")
         self.toolBar.Action15.triggered.connect(self.Author)
