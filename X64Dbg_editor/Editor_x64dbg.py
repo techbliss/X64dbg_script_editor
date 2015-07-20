@@ -204,7 +204,7 @@ class Ui_MainWindow(object):
         self.codebox.clear()
 
     def open(self):
-        self.path = QFileInfo(self.filename).path()
+        self.path = QtCore.QFileInfo(self.filename).path()
         # Get filename and show only .writer files
         self.filename = QtGui.QFileDialog.getOpenFileName(
                    self.vindu, 'Open File', self.path, "Python Files (*.py *.pyc *.pyw)",
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
 
 
     def savefile(self):
-        self.path = QFileInfo(self.filename).path()
+        self.path = QtCore.QFileInfo(self.filename).path()
         self.filename = QtGui.QFileDialog.getSaveFileName(
             self.vindu, "Save as", self.path, "Python Files (*.py *.pyc *.pyw)",
             )
