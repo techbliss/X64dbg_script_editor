@@ -128,6 +128,11 @@ class Ui_MainWindow(object):
         self.toolBar.Action15.setStatusTip("Author")
         self.toolBar.Action15.setShortcut("Ctrl+B")
         self.toolBar.Action15.triggered.connect(self.Author)
+        #pdf
+        #self.toolBar.Action16 = QtGui.QAction(QtGui.QIcon(":/ico/auth.png"),"Author",self.toolBar)
+        #self.toolBar.Action16.setStatusTip("Save to PDF")
+        #self.toolBar.Action16.setShortcut("Ctrl+8")
+        #self.toolBar.Action16.triggered.connect(self.filePrintPdf)
 
         #actions
         self.toolBar.addAction(self.toolBar.newAction)
@@ -158,8 +163,8 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.toolBar.Action14)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolBar.Action15)
-
-
+        #self.toolBar.addSeparator()
+        #self.toolBar.addAction(self.toolBar.Action16)
 
         #font
         skrift = QFont()
@@ -272,6 +277,8 @@ class Ui_MainWindow(object):
     def Author(self):
         import webbrowser
         webbrowser.open('https://twitter.com/zadow28')
+
+
 
 from PyQt4 import Qsci
 
