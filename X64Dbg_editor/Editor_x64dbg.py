@@ -8,7 +8,7 @@ from PyQt4 import QtCore, QtGui, Qsci
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, QsciScintillaBase
 from PyQt4.QtGui import QFont, QFontMetrics, QColor, QMainWindow, QTextCursor
 import icons.ico
-from icons.ico import *
+from icons import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
