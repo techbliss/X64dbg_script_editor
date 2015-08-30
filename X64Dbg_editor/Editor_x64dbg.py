@@ -3,7 +3,6 @@ import sys
 import re
 import os
 from os import path
-import runpy
 import sys
 sys.path.insert(0, os.getcwd()+r'\icons')
 import PyQt4
