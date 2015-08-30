@@ -2,14 +2,16 @@
 import sys
 import re
 import os
+from os import path
+import runpy
 import sys
 sys.path.insert(0, os.getcwd()+r'\icons')
-mypath = os.path.dirname(__file__)
 import PyQt4
 from PyQt4 import QtCore, QtGui, Qsci
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, QsciScintillaBase
 from PyQt4.QtGui import QFont, QFontMetrics, QColor, QMainWindow, QTextCursor
 import ico
+
 
 
 try:
@@ -220,6 +222,7 @@ class Ui_MainWindow(object):
         if self.filename:
             with open(self.filename,"r") as self.file:
                 self.codebox.setText(self.file.read())
+        os.chdir(str(self.path))
 
 
 
@@ -230,6 +233,7 @@ class Ui_MainWindow(object):
             )
         if self.filename:
             self.savetext(self.filename)
+        os.chdir(str(self.path))
 
 
     def savetext(self, fileName):
@@ -240,20 +244,15 @@ class Ui_MainWindow(object):
         else:
             QtGui.QMessageBox.information(self.vindu, "Unable to open file",
                     file.errorString())
+        os.chdir(str(self.path))
+
 
     def runto(self):
         g = globals()
         script = str(self.codebox.text())
+        os.chdir(str(self.path))
         exec (script, g)
         QtGui.QCloseEvent()
-
-    #for now this isent here
-    '''def runtoglobal(self):
-        import subprocess
-        from subprocess import Popen
-        file = self.filename
-        subprocess.Popen(self.filename)
-    '''
 
     def nofoldingl(self):
         self.codebox.setFolding(QsciScintilla.NoFoldStyle)
