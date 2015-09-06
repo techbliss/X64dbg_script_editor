@@ -252,13 +252,15 @@ class Ui_MainWindow(object):
         script = str(self.codebox.text())
         try:
             exec (script, g)
+            QtGui.QCloseEvent()
 
         except ImportError:
             os.chdir(str(self.path))
             os.path.join(os.path.expanduser('~'), os.path.expandvars(str(self.path)))
             sys.path.insert(0, str(self.path))
             exec (script, g)
-        QtGui.QCloseEvent()
+            QtGui.QCloseEvent()
+
 
     def nofoldingl(self):
         self.codebox.setFolding(QsciScintilla.NoFoldStyle)
