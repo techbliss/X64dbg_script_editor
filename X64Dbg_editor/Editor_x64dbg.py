@@ -177,9 +177,18 @@ class Ui_MainWindow(object):
         self.codebox.setFont(skrift)
 
         #python style
+        #python style
         lexer = QsciLexerPython(self.codebox)
         #api test not working
         api = Qsci.QsciAPIs(lexer)
+        apidir = os.path.dirname(os.path.realpath(__file__))
+        API_FILE = apidir+r'\python.api'
+        api.load(API_FILE)
+        api.prepare()
+        self.codebox.setAutoCompletionThreshold(1)
+        self.codebox.setAutoCompletionThreshold(6)
+        self.codebox.setAutoCompletionThreshold(8)
+        self.codebox.setAutoCompletionSource(Qsci.QsciScintilla.AcsAPIs)
         lexer.setDefaultFont(skrift)
         self.codebox.setLexer(lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
