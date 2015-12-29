@@ -9,9 +9,21 @@ import PyQt4
 from PyQt4 import QtCore, QtGui, Qsci
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, QsciScintillaBase
 from PyQt4.QtGui import QFont, QFontMetrics, QColor, QMainWindow, QTextCursor
-import ico
 
+try:
+    import ico
+except ImportError:
+    import icons.ico
 
+try:
+    import iconsmore
+except ImportError:
+    import icons.iconsmore
+
+try:
+    import icons3
+except ImportError:
+    import icons.icons3
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -131,11 +143,31 @@ class Ui_MainWindow(object):
         self.toolBar.Action15.setStatusTip("Author")
         self.toolBar.Action15.setShortcut("Ctrl+B")
         self.toolBar.Action15.triggered.connect(self.Author)
-        #pdf
-        #self.toolBar.Action16 = QtGui.QAction(QtGui.QIcon(":/ico/auth.png"),"Author",self.toolBar)
-        #self.toolBar.Action16.setStatusTip("Save to PDF")
-        #self.toolBar.Action16.setShortcut("Ctrl+8")
-        #self.toolBar.Action16.triggered.connect(self.filePrintPdf)
+        #toggle off code regonision
+        self.toolBar.Action16 = QtGui.QAction(QtGui.QIcon(":/ico2/pythonminus.png"),"Disable Code recognition",self.toolBar)
+        self.toolBar.Action16.setStatusTip("Disable Code recognition")
+        self.toolBar.Action16.setShortcut("Alt+D")
+        self.toolBar.Action16.triggered.connect(self.Diablecode)
+        #toogle on
+        self.toolBar.Action17 = QtGui.QAction(QtGui.QIcon(":/ico2/pypluss.png"),"Enable Code recognition",self.toolBar)
+        self.toolBar.Action17.setStatusTip("Enable Code recognition")
+        self.toolBar.Action17.setShortcut("Alt+E")
+        self.toolBar.Action17.triggered.connect(self.Reiablecode)
+        # zoom in
+        self.toolBar.Action18 = QtGui.QAction(QtGui.QIcon(":/ico3/in.png"),"Zoom In",self.toolBar)
+        self.toolBar.Action18.setStatusTip("Zoom In")
+        self.toolBar.Action18.setShortcut("CTRL+SHIFT++")
+        self.toolBar.Action18.triggered.connect(self.udder)
+        #zoom out
+        self.toolBar.Action19 = QtGui.QAction(QtGui.QIcon(":/ico3/out.png"),"Zoom Out",self.toolBar)
+        self.toolBar.Action19.setStatusTip("Zoom Out")
+        self.toolBar.Action19.setShortcut("CTRL+SHIFT+-")
+        self.toolBar.Action19.triggered.connect(self.odder)
+
+        self.toolBar.Action20 = QtGui.QAction(QtGui.QIcon(":/ico3/10.png"),"Profile Code",self.toolBar)
+        self.toolBar.Action20.setStatusTip("Profile Code")
+        self.toolBar.Action20.setShortcut("CTRL+SHIFT+E")
+        self.toolBar.Action20.triggered.connect(self.runtoprob)
 
         #actions
         self.toolBar.addAction(self.toolBar.newAction)
@@ -166,8 +198,16 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.toolBar.Action14)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolBar.Action15)
-        #self.toolBar.addSeparator()
-        #self.toolBar.addAction(self.toolBar.Action16)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.toolBar.Action16)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.toolBar.Action17)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.toolBar.Action18)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.toolBar.Action19)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.toolBar.Action20)
 
         #font
         skrift = QFont()
@@ -217,6 +257,13 @@ class Ui_MainWindow(object):
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar", None))
 
     #functions fo actions
+
+    def udder(self):
+        self.codebox.zoomIn()
+
+    def odder(self):
+        self.codebox.zoomOut()
+
     def newfile(self):
         self.codebox.clear()
 
@@ -270,6 +317,23 @@ class Ui_MainWindow(object):
             exec (script, g)
             QtGui.QCloseEvent()
 
+    def runtoprob(self):
+        try:
+            self.path = QtCore.QFileInfo(self.filename).path()
+        except AttributeError:
+            pass
+        self.path = QtCore.QFileInfo(self.filename).path()
+        g = globals()
+        os.chdir(str(self.path))
+        script = str(self.codebox.text())
+        import cProfile
+        cProfile.run(script)
+
+    def Diablecode(self):
+        self.codebox.setAutoCompletionSource(Qsci.QsciScintilla.AcsNone)
+
+    def Reiablecode(self):
+        self.codebox.setAutoCompletionSource(Qsci.QsciScintilla.AcsAPIs)
 
     def nofoldingl(self):
         self.codebox.setFolding(QsciScintilla.NoFoldStyle)
@@ -308,5 +372,6 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    MainWindow.resize(1000, 600)
     MainWindow.show()
     app.exec_()
