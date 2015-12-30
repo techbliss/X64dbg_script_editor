@@ -31,5 +31,32 @@ http://www.techbliss.org/threads/test-build-x64dbg-support-for-pyqt4-with-editor
 16. Author:             Ctrl+B</pre>
 
 
+###################################################
+ #              Author Storm Shadow                #
+ #                   Hotkeys                       #
+ #         NewFile:            Ctrl+N              #
+ #         OpenFile:           Ctrl+O              #
+ #         SaveFile:           Ctrl+S              #
+ #         RunScript:          Ctrl+E              #
+ #         Undo:               Ctrl+Z              #
+ #         Redo:               Ctrl+Y              #
+ #         SelectALL:          Ctrl+A              #
+ #         Paste:              Ctrl+V              #
+ #         ResetFolding:       Ctrl+R              #
+ #         CircleFolding:      Ctrl+C              #
+ #         PlainFolding:       Ctrl+P              #
+ #         x64dbg homepage:    Ctrl+W              #
+ #         X64dbg Irc          Ctrl+I              #
+ #         PythonGit:          Ctrl+G              #
+ #         Author:             Ctrl+B              #
+ #         Enable Reg:         Alt+E               #
+ #         Disable Reg:        Alt+D               #
+ #         Zoom +:             CTRL+SHIFT++        #
+ #         Zoom -:             CTRL+SHIFT+-        #  
+ ###################################################
+ #              X64dbg  python Editor              #
+ ###################################################
+
+
 ![zkl62pf](https://cloud.githubusercontent.com/assets/3592375/8758623/7b971de4-2ce6-11e5-9662-171677651499.png)
 
