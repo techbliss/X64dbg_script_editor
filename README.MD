@@ -1,4 +1,4 @@
-x64dbg Script editor v3
+x64dbg Script editor
 
 Python script runner and editor, for x64dbg python module.
 https://github.com/x64dbg/x64dbg-python
