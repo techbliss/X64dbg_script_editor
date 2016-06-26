@@ -1,19 +1,22 @@
-x64dbg Script editor
+x64dbg Script editor/ide
 
 Python script runner and editor, for x64dbg python module.
 
 https://github.com/x64dbg/x64dbg-python
 
 dependencies
-http://www.riverbankcomputing.com/software/pyqt/download
+https://github.com/x64dbg/PyQt5
 
-py2.7 Qt version 4.8 x86 machine
+py2.7 Qt version 5.+ x86 machine
 
 this will only work when x64dbg gets the OpenScriptThread added
 Update ! its added
 get help here
-http://www.techbliss.org/threads/test-build-x64dbg-support-for-pyqt4-with-editor.721/#post-2363
 
+
+
+This is made spesific for x64dbg python.
+if you wanna run it strit from windows unquote the last few lines in Editor_x64dbg.py
 
 
 ```
