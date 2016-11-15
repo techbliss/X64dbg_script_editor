@@ -29,6 +29,7 @@ Fix for GUI None Responsive while debugging.
     from x64dbgpy.pluginsdk.x64dbg import *
     x64dbgpy.pluginsdk.debug.Run()
 
+fix 4k displays
 
 Minor code fixes.
 
