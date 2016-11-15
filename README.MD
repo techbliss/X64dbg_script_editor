@@ -23,7 +23,10 @@ Added font box Getting.
 
 ready for debugger(added breakpoint boxes in editor).
 
+Fix for GUI None Responsive while debugging.
+
 Minor code fixes.
+
 
 
 **Build** the plugin was build with my x64py template
