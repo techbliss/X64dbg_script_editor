@@ -26,7 +26,9 @@ ready for debugger(added breakpoint boxes in editor).
 Fix for GUI None Responsive while debugging.
 
 `import x64dbgpy
+
 from x64dbgpy.pluginsdk.x64dbg import *
+
 x64dbgpy.pluginsdk.debug.Run()`
 
 Minor code fixes.
