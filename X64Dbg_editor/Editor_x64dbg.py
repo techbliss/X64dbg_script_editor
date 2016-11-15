@@ -24,6 +24,7 @@ print '''   ###################################################
  #         Disable Reg:        Alt+D               #
  #         Zoom +:             CTRL+SHIFT++        #
  #         Zoom -:             CTRL+SHIFT+-        #
+ #         Profile Code        Ctrl+Shift+ E       #
  ###################################################
  #              X64dbg  python Editor              #
  ###################################################
@@ -35,6 +36,7 @@ import os
 from os import path
 import sys
 dn = os.getcwd()
+print dn
 sys.path.insert(0, os.getcwd() + r'\\plugins\\X64Dbg_editor\\icons')
 sys.path.insert(0, os.getcwd() + r'\\plugins\\X64Dbg_editor')
 sys.path.insert(0, dn)
@@ -42,12 +44,18 @@ apifolder = dn + r'\\plugins\\X64Dbg_editor'
 sys.path.insert(0, os.getcwd()+r'\icons')
 
 import PyQt5
-from PyQt5 import QtCore, QtGui, Qsci, QtWidgets
+from PyQt5 import QtCore, QtGui, Qsci, QtWidgets, Qt
 from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, \
     QsciScintillaBase
 from PyQt5.QtGui import QFont, QFontMetrics, QColor, QTextCursor
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QDialog, QMessageBox, QDesktopWidget, QWidget
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QEvent
 
+if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 try:
     import ico
 except ImportError:
@@ -62,6 +70,11 @@ try:
     import icons3
 except ImportError:
     import icons.icons3
+
+try:
+    import iconf
+except ImportError:
+    import icons.iconf
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -83,19 +96,22 @@ except AttributeError:
 
 
 class Ui_MainWindow(object):
+    ARROW_MARKER_NUM = 8
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8('MainWindow'))
         MainWindow.resize(640, 480)
         self.vindu = QtWidgets.QWidget(MainWindow)
         self.vindu.setStyleSheet(_fromUtf8('notusedasyet'))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        # MainWindow.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        #MainWindow.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.filename = ''
         self.vindu.setObjectName(_fromUtf8('vindu'))
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.vindu)
+        self.verticalLayout = PyQt5.QtWidgets.QVBoxLayout(self.vindu)
         app_icon = QtGui.QIcon()
         app_icon.addFile(':/ico/ico.png', QtCore.QSize(16, 16))
         MainWindow.setWindowIcon(app_icon)
+        self.verticalLayout.setContentsMargins(0,0,0,0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(_fromUtf8('verticalLayout'))
         self.codebox = Qsci.QsciScintilla(self.vindu)
@@ -110,9 +126,16 @@ class Ui_MainWindow(object):
         self.toolBar.setAutoFillBackground(False)
         self.toolBar.setIconSize(QtCore.QSize(32, 32))
         self.toolBar.setObjectName(_fromUtf8('toolBar'))
-
         MainWindow.addToolBar(QtCore.Qt.LeftToolBarArea, self.toolBar)
         self.toolBar.addSeparator()
+
+        #getting ready for debugger
+        self.codebox.setMarginSensitivity(1, True)
+        self.codebox.marginClicked.connect(self.on_margin_clicked)
+
+        #self.codebox.connect(self.codebox, QtCore.SIGNAL('marginClicked(int, int, Qt::KeyboardModifiers)'), self.on_margin_clicked)
+        self.codebox.markerDefine(QsciScintilla.FullRectangle, self.ARROW_MARKER_NUM)
+        self.codebox.setMarkerBackgroundColor(QColor("#ee1111"), self.ARROW_MARKER_NUM)
         #first action Newfile
         self.toolBar.newAction = QtWidgets.QAction(QtGui.QIcon(":/ico/new.png"),"New",self.toolBar)
         self.toolBar.newAction.setStatusTip("Clear TextBox or make new document.")
@@ -164,6 +187,11 @@ class Ui_MainWindow(object):
         self.toolBar.Action10.setStatusTip("Plain Folding")
         self.toolBar.Action10.setShortcut("Ctrl+P")
         self.toolBar.Action10.triggered.connect(self.plainfold)
+        # fonts
+        self.toolBar.Action21 = QtWidgets.QAction(QtGui.QIcon(":/ico4/font.png"), "Fonts", self.toolBar)
+        self.toolBar.Action21.setStatusTip("Fonts")
+        self.toolBar.Action21.setShortcut("Ctrl+F")
+        self.toolBar.Action21.triggered.connect(self.font_choice)
         #web baby
         self.toolBar.Action11 = QtWidgets.QAction(QtGui.QIcon(":/ico/web.png"),"Goto x64dbg homepage",self.toolBar)
         self.toolBar.Action11.setStatusTip("Home of x64dbg")
@@ -231,6 +259,8 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.toolBar.Action9)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolBar.Action10)
+        self.toolBar.addAction(self.toolBar.Action21)
+        self.toolBar.addSeparator()
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolBar.Action11)
         self.toolBar.addSeparator()
@@ -250,18 +280,20 @@ class Ui_MainWindow(object):
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolBar.Action20)
 
+
         #font
-        skrift = QFont()
-        skrift.setFamily('Consolas')
-        skrift.setFixedPitch(True)
-        skrift.setPointSize(12)
-        self.codebox.setFont(skrift)
+        self.skrift = QFont()
+        self.skrift.setFamily('Consolas')
+        self.skrift.setFixedPitch(True)
+        self.skrift.setPointSize(12)
+        self.codebox.setFont(self.skrift)
 
         #python style
-        #python style
-        lexer = QsciLexerPython(self.codebox)
+        self.lexer = QsciLexerPython(self.codebox)
+        self.lexer.setFont(self.skrift)
+        self.lexer.setEolFill(True)
         #api test not working
-        api = Qsci.QsciAPIs(lexer)
+        api = Qsci.QsciAPIs(self.lexer)
         apidir = os.path.dirname(os.path.realpath(__file__))
         API_FILE = apidir+r'\Python.api'
         api.load(API_FILE)
@@ -270,13 +302,13 @@ class Ui_MainWindow(object):
         self.codebox.setAutoCompletionThreshold(6)
         self.codebox.setAutoCompletionThreshold(8)
         self.codebox.setAutoCompletionSource(Qsci.QsciScintilla.AcsAPIs)
-        lexer.setDefaultFont(skrift)
-        self.codebox.setLexer(lexer)
+        self.lexer.setDefaultFont(self.skrift)
+        self.codebox.setLexer(self.lexer)
         self.codebox.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Consolas')
 
         #line numbers
-        fontmetrics = QFontMetrics(skrift)
-        self.codebox.setMarginsFont(skrift)
+        fontmetrics = QFontMetrics(self.skrift)
+        self.codebox.setMarginsFont(self.skrift)
         self.codebox.setMarginWidth(0, fontmetrics.width("0000") + 6)
         self.codebox.setTabWidth(4)
 
@@ -292,6 +324,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "X64dbg Script Editor", None))
@@ -404,37 +437,70 @@ class Ui_MainWindow(object):
         import webbrowser
         webbrowser.open('https://twitter.com/zadow28')
 
+
+    def font_choice(self):
+        self.lbl = self.lexer
+        font, ok = QtWidgets.QFontDialog.getFont()
+
+        if ok:
+            self.lbl.setFont(font)
+
+
+    def on_margin_clicked(self, nmargin, nline, modifiers):
+        # Toggle marker for the line the margin was clicked on
+        if self.codebox.markersAtLine(nline) != 0:
+            self.codebox.markerDelete(nline, self.ARROW_MARKER_NUM)
+        else:
+            self.codebox.markerAdd(nline, self.ARROW_MARKER_NUM)
+
+
+
 class MyWindow(QtWidgets.QMainWindow):
+    import os
     '''
     we have to ask user for quiting so we can change back to root dir
     '''
+
     def closeEvent(self, event):
-        os.chdir(dn)
-        print '''
- ###################################################
- #              Author Storm Shadow                #
- #                   Thx To                        #
- #                  Tomer Zait                     #
- #                   mrexodia                      #
- #      Follow x64dbg python project on Github     #
- ###################################################
- #              x64dbg python Editor               #
- ###################################################
+        reply = QMessageBox.question(self, 'Exit',
+            "Are you sure to quit?", QMessageBox.Yes |
+            QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            print dn
+            os.chdir(dn)
+            print dn
+            os.chdir('../..')
+            print dn
+            print '''
+###################################################
+#              Author Storm Shadow                #
+#                   Thx To                        #
+#                  Tomer Zait                     #
+#                   mrexodia                      #
+#      Follow x64dbg python project on Github     #
+###################################################
+#              x64dbg python Editor               #
+###################################################
 '''
-        os.chdir(dn)
-        event.accept()
+            event.accept()
+        else:
+            event.ignore()
 
 
 from PyQt5 import Qsci
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import sys
-    #app = QtWidgets.QApplication.instance() #enable for usage outside x64dbg
-    #if not app: #enable for usage outside x64dbg
-        #app = QtWidgets.QApplication([]) #enable for usage outside x64dbg
+
+    app = QtWidgets.QApplication.instance()  # enable for usage outside x64dbg
+    if not app:  # enable for usage outside x64dbg
+        app = QtWidgets.QApplication([])  # enable for usage outside x64dbg
+
     MainWindow = MyWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.resize(1000, 600)
     MainWindow.show()
-    #app.exec_() #enable for usage outside x64dbg
+
+    app.exec_()  # enable for usage outside x64dbg

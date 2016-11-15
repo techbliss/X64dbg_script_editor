@@ -1,11 +1,16 @@
+[![](https://img.shields.io/badge/Twitter--blue.svg?maxAge=2592000)](https://twitter.com/zadow28) ![Python version](https://img.shields.io/badge/python-2.7-brightgreen.svg?maxAge=2592000) ![PyQ5t](https://img.shields.io/badge/PyQt5-5.6-orange.svg) [![](https://img.shields.io/badge/Donate-Paypal-blue.svg?maxAge=2592000)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8KXM6W2JVRUWL) [![](https://img.shields.io/badge/Latest-Release-red.svg?maxAge=2592000)](https://github.com/techbliss/X64dbg_script_editor/releases/latest)
+
+
 x64dbg Script editor/ide
 
 Python script runner and editor, for x64dbg python module.
 
-https://github.com/x64dbg/x64dbg-python
+[![](https://img.shields.io/badge/Xdbgpy-Link-blue.svg?maxAge=2592000)](https://github.com/x64dbg/x64dbg-python)
+
 
 dependencies
-https://github.com/x64dbg/PyQt5
+[![](https://img.shields.io/badge/x64dbg_PyQt5-Link-blue.svg?maxAge=2592000)](https://github.com/x64dbg/PyQt5)
+
 
 py2.7 Qt version 5.+ x86 machine
 
@@ -16,7 +21,7 @@ get help here
 
 
 This is made spesific for x64dbg python.
-if you wanna run it strit from windows unquote the last few lines in Editor_x64dbg.py
+if you wanna run it strict from windows unquote the last few lines in Editor_x64dbg.py
 
 
 ```
