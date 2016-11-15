@@ -9,6 +9,7 @@ Python script runner and editor, for x64dbg python module.
 
 
 dependencies
+
 [![](https://img.shields.io/badge/x64dbg_PyQt5-Link-blue.svg?maxAge=2592000)](https://github.com/x64dbg/PyQt5)
 
 
