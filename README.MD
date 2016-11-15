@@ -15,7 +15,7 @@ dependencies
 py2.7 Qt version 5.+ x86/64 machine
 
 
-****v.2.0 changelog****
+**v.2.0 changelog**
 
 Fixed editor cant open twize( cant find editor). 
 
@@ -26,7 +26,7 @@ ready for debugger(added breakpoint boxes in editor).
 Minor code fixes.
 
 
-****Build**** the plugin was build with my x64py template
+**Build** the plugin was build with my x64py template
 
 [![](https://img.shields.io/badge/x64dbgpy_Plugin-Template_Link-green.svg?maxAge=2592000)](https://github.com/techbliss/x64dbgpy-Plugin-Template)
 
@@ -66,9 +66,10 @@ if you wanna run it strict from windows unquote the last few lines in Editor_x64
 ```
 
 **Without stylesheets**
+
 ![zkl62pf](https://cloud.githubusercontent.com/assets/3592375/8758623/7b971de4-2ce6-11e5-9662-171677651499.png)
 
-****Here with custom stylesheets****
+**Here with custom stylesheets**
 
 **Open in plugin menu**
 ![1](https://cloud.githubusercontent.com/assets/3592375/20305540/501913c8-ab36-11e6-8e9d-b07aa9ea19b6.png)
