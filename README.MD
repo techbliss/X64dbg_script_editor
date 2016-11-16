@@ -89,3 +89,11 @@ if you wanna run it strict from windows unquote the last few lines in Editor_x64
 **Breakpoint boxes**
 ![bp](https://cloud.githubusercontent.com/assets/3592375/20305541/5019441a-ab36-11e6-9394-970447859d51.png)
 
+
+**Donaters**
+
+Many thanks to [![](https://img.shields.io/badge/Jetbrains-Company-blue.svg?maxAge=2592000)](https://www.jetbrains.com/) for donating a licence.
+
+
+![icon_upsource](https://cloud.githubusercontent.com/assets/3592375/20355736/9f4a6842-ac22-11e6-9901-9055ae8f1a69.png)![icon_pycharm](https://cloud.githubusercontent.com/assets/3592375/20355738/9f4f9bfa-ac22-11e6-8e1b-e49ba71b672c.png)
+
