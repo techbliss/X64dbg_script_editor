@@ -381,31 +381,32 @@ class Ui_MainWindow(object):
         os.chdir(str(self.path))
         script = str(self.codebox.text())
         try:
-            exec (script, g)
-            QtGui.QCloseEvent()
-        except ImportError:
             os.chdir(str(self.path))
-            os.path.join(os.path.expanduser('~'),
-                         os.path.expandvars(str(self.path)))
+            os.path.join(os.path.expanduser('~'), os.path.expandvars(str(self.path)))
             sys.path.insert(0, str(self.path))
             exec (script, g)
-            QtGui.QCloseEvent()
-        except Exception, e:
-            print str(e)
-            QtGui.QCloseEvent()
+        except Exception as e:
+            print e.__doc__
+            print e.message
+        else:
+            exec (script, g)
 
 
     def runtoprob(self):
         try:
             self.path = QtCore.QFileInfo(self.filename).path()
-        except AttributeError:
-            pass
-        self.path = QtCore.QFileInfo(self.filename).path()
-        g = globals()
-        os.chdir(str(self.path))
-        script = str(self.codebox.text())
-        import cProfile
-        cProfile.run(script)
+            self.path = QtCore.QFileInfo(self.filename).path()
+            g = globals()
+            os.chdir(str(self.path))
+            script = str(self.codebox.text())
+            import cProfile
+            cProfile.run(script)
+        except Exception as e:
+            print e.__doc__
+            print e.message
+        else:
+            import cProfile
+            cProfile.run(script)
 
     def Diablecode(self):
         self.codebox.setAutoCompletionSource(Qsci.QsciScintilla.AcsNone)
