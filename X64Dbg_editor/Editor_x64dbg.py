@@ -490,7 +490,7 @@ class MyWindow(QtWidgets.QMainWindow):
             print dn
             os.chdir(dn)
             print dn
-            os.chdir('../..')
+            #os.chdir('../..')
             print dn
             print '''
 ###################################################
@@ -504,8 +504,10 @@ class MyWindow(QtWidgets.QMainWindow):
 ###################################################
 '''
             event.accept()
+            os.chdir(dn)
         else:
             event.ignore()
+            os.chdir(dn)
 
 
 from PyQt5 import Qsci
