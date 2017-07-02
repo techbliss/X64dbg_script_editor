@@ -33,6 +33,13 @@ fix 4k displays
 
 Minor code fixes.
 
+**v.2.0 changelog Releaser 02.07.2017**
+
+Fix Qt app Crash ( Resolved buy @bruce30262)
+
+[on the latest release x64dbg ，lost response](https://github.com/techbliss/X64dbg_script_editor/issues/4)
+
+Fix Reopen not found
 
 
 **Build** the plugin was build with my x64py template
