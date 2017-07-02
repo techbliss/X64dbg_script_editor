@@ -45,18 +45,36 @@ apifolder = dn + r'\\plugins\\X64Dbg_editor'
 sys.path.insert(0, os.getcwd()+r'\icons')
 
 import PyQt5
-from PyQt5 import QtCore, QtGui, Qsci, QtWidgets, Qt
+from PyQt5 import QtCore, QtGui, Qsci, QtWidgets
 from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs, \
     QsciScintillaBase
 from PyQt5.QtGui import QFont, QFontMetrics, QColor, QTextCursor
 from PyQt5.QtWidgets import QMainWindow, QDialog, QMessageBox, QDesktopWidget, QWidget
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QEvent
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QEvent, QCoreApplication
+
+plugin_path = ""
+if sys.platform == "win32":
+    if hasattr(sys, "frozen"):
+        plugin_path = os.path.join(os.path.dirname(os.path.abspath(sys.executable)), "PyQt5", "plugins")
+        QCoreApplication.addLibraryPath(plugin_path)
+    else:
+        import site
+        for dir in site.getsitepackages():
+            QCoreApplication.addLibraryPath(os.path.join(dir, "PyQt5", "plugins"))
+
+elif sys.platform == "darwin":
+    plugin_path = os.path.join(QCoreApplication.getInstallPrefix(), "Resources", "plugins")
+
+if plugin_path:
+    QCoreApplication.addLibraryPath(plugin_path)
+
 
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+
 try:
     import ico
 except ImportError:
