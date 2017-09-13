@@ -407,7 +407,8 @@ class Ui_MainWindow(object):
             print e.__doc__
             print e.message
         else:
-            exec (script, g)
+            pass
+            #exec (script, g)
 
 
     def runtoprob(self):
