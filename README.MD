@@ -1,6 +1,7 @@
 [![](https://img.shields.io/badge/Twitter--blue.svg?maxAge=2592000)](https://twitter.com/zadow28) ![Python version](https://img.shields.io/badge/python-2.7-brightgreen.svg?maxAge=2592000) ![PyQ5t](https://img.shields.io/badge/PyQt5-5.6-orange.svg) [![](https://img.shields.io/badge/Donate-Paypal-blue.svg?maxAge=2592000)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8KXM6W2JVRUWL) [![](https://img.shields.io/badge/Latest-Release-red.svg?maxAge=2592000)](https://github.com/techbliss/X64dbg_script_editor/releases/latest)
 
 
+
 x64dbg Script editor/ide
 
 Python script runner and editor, for x64dbg python module.
